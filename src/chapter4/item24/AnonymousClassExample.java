@@ -1,5 +1,7 @@
 package chapter4.item24;
 
+import java.util.Comparator;
+
 public class AnonymousClassExample {
 	public static void main(String[] args) {
 
