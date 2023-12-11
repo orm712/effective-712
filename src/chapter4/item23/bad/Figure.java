@@ -1,7 +1,7 @@
 package chapter4.item23.bad;
 
 class Figure {
-	enum Shape {RECTANGLE, CIRCLE}
+	enum Shape {RECTANGLE, CIRCLE, TRIANGLE}
 
 	;
 
@@ -9,16 +9,21 @@ class Figure {
 	final Shape shape;
 
 	// 다음 필드들은 모양이 사각형(RECTANGLE)일 때만 쓰인다.
-	double length;
-	double width;
+	final double length;
+	final double width;
 
 	// 다음 필드는 모양이 원(CIRCLE)일 때만 쓰인다.
 	double radius;
+
+
 
 	// 원용 생성자
 	Figure(double radius) {
 		shape = Shape.CIRCLE;
 		this.radius = radius;
+
+		length = 0;
+		width =0;
 	}
 
 	// 사각형용 생성자
@@ -37,5 +42,10 @@ class Figure {
 			default:
 				throw new AssertionError(shape);
 		}
+	}
+
+	public static void main(String[] args) {
+		//
+		// Figure asdf =
 	}
 }
