@@ -7,10 +7,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-// 코드 28-6 리스트 기반 Chooser - 타입 안전성 확보! (168쪽)
+//제네릭을 사용한 버전
 public class ChooserGeneric<T> {
+    //private final Object[] choiceArray;
+    //private final T[] choiceArray;
     private final List<T> choiceList;
 
+
+//    public Chooser(Collection choices) {
+//        choiceArray = choices.toArray();
+//    }
     public ChooserGeneric(Collection<T> choices) {
         choiceList = new ArrayList<>(choices);
     }
