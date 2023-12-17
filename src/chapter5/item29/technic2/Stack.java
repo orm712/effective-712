@@ -49,6 +49,6 @@ public class Stack<E> {
         for (String arg : args)
             stack.push(arg);
         while (!stack.isEmpty())
-            System.out.println(stack.pop().toUpperCase());
+            System.out.println(stack.pop());
     }
 }

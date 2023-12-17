@@ -4,7 +4,6 @@ import chapter5.item29.EmptyStackException;
 
 import java.util.Arrays;
 
-// E[]를 이용한 제네릭 스택 (170-174쪽)
 public class StackArray {
     private Object[] elements;
     private int size = 0;
