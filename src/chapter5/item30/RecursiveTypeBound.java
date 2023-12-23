@@ -4,6 +4,7 @@ import java.util.*;
 
 public class RecursiveTypeBound {
     //모든 타입 E는 자신과 비교할 수 있다.
+    //Comparable<E> 인터페이스를 구현하는 모든 타입 E는 자신과 비교할 수 있다.
     //상호 비교 가능하다.
     public static <E extends Comparable<E>> E max(Collection<E> c) {
         if (c.isEmpty())

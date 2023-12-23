@@ -22,5 +22,7 @@ public class GenericSingletonFactory {
         UnaryOperator<Number> sameNumber = identityFunction();
         for (Number n : numbers)
             System.out.println(sameNumber.apply(n));
+
+        //identifyFunction으로 제네릭 싱글턴 반환
     }
 }
