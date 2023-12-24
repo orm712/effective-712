@@ -7,6 +7,7 @@ public class Union {
     public static <E> Set<E> union(Set<? extends E> s1,
                                    Set<? extends E> s2) {
         //s1과 s2 모두 E의 생산자
+        //원래 result라는 set에 s1과 s2를 생산(추가/합)하는 것
         //그렇기 때문에 Set<Integer>와 Set<Double>을 합칠 수 있다.
         Set<E> result = new HashSet<E>(s1);
         result.addAll(s2);

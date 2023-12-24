@@ -37,12 +37,15 @@ public class Stack<E> {
 //    // 코드 31-1 와일드카드 타입을 사용하지 않은 pushAll 메서드 - 결함이 있다! (181쪽)
 //    // 매개변수화 타입이 불공변이기 때문이다.
 //    public void pushAll(Iterable<E> src) {
+    //  //타입이 일치하면 괜찮은데 상위/하위타입이면 오류 발생
 //        for (E e : src)
 //            push(e);
 //    }
 
     // 코드 31-2 E 생산자(producer) 매개변수에 와일드카드 타입 적용 (182쪽)
     public void pushAll(Iterable<? extends E> src) {
+        //E의 Iterable이 아니라 E의 하위타입의 Iterable이어야 함
+        //Number에 Integer를 넣을 수 있음
         for (E e : src)
             push(e);
     }
@@ -55,6 +58,8 @@ public class Stack<E> {
 
     // 코드 31-4 E 소비자(consumer) 매개변수에 와일드카드 타입 적용 (183쪽)
     public void popAll(Collection<? super E> dst) {
+        //E의 Collection이 아니라 E의 상위타입의 Collection이어야 함
+        //Number에 Object를 넣을 수 있음
         while (!isEmpty())
             dst.add(pop());
     }

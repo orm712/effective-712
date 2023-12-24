@@ -12,6 +12,7 @@ public class Chooser<T> {
 
     // 코드 31-5 T 생산자 매개변수에 와일드카드 타입 적용 (184쪽)
     public Chooser(Collection<? extends T> choices) {
+        //chooseList에 값을 생산(추가)하는 것
         //T 타입의 값을 생산하기만 한다.
         //Chooser<Number>에 List<Integer>넘겨줘도 문제 없다.
         choiceList = new ArrayList<>(choices);
