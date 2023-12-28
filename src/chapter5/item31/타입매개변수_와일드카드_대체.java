@@ -4,8 +4,8 @@ import java.util.List;
 
 public class 타입매개변수_와일드카드_대체 {
     //비한정적 타입 매개변수
-    public static void printList(List<?> list) {
-        for (Object element : list) {
+    public static <T> void printList(List<T> list) {
+        for (T element : list) {
             System.out.println(element);
         }
     }

@@ -16,6 +16,7 @@ public class RecursiveTypeBound {
 //
 //        return result;
 //    }
+
     //PECS를 두 번 적용
     //입력 매개변수에서는 E 인스턴스를 생산
     //타입 매개변수에서는 Comparable<E> E 인스턴스를 소비
@@ -37,9 +38,11 @@ public class RecursiveTypeBound {
 //        List<String> argList = Arrays.asList(args);
 
         List<ScheduledFuture<?>> scheduledFutures = new ArrayList<>();
-
+        max(scheduledFutures);
         //왜 이렇게까지 해야 하나?
         //ScheduledFuture는 Comparable<ScheduledFuture>를 구현하지 않음
+
+
 //        System.out.println(max(argList));
     }
 }
