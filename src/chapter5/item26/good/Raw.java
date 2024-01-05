@@ -7,7 +7,7 @@ public class Raw {
 
     public static void main(String[] args) {
 //
-//        stamps.add(new Coin(1)); // 바로 오류 뜸
+        stamps.add(new Stamp(1)); // 바로 오류 뜸
 
 
         for(Iterator i = stamps.iterator(); i.hasNext();){

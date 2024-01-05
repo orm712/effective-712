@@ -1,12 +1,11 @@
 package chapter5.item28;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-// 코드 28-6 리스트 기반 Chooser - 타입 안전성 확보! (168쪽)
+//제네릭을 사용하지 않은 버전
 public class Chooser {
     private final Object[] choiceArray;
 
@@ -15,6 +14,7 @@ public class Chooser {
     }
 
     public Object choose() {
+        //컬렉션 안의 원소 중 하나를 무작위로 선택해 반환한다.
         Random rnd = ThreadLocalRandom.current();
         return choiceArray[rnd.nextInt(choiceArray.length)];
     }
