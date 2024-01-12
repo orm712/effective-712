@@ -37,7 +37,7 @@ public class Stack<E> {
 //    // 코드 31-1 와일드카드 타입을 사용하지 않은 pushAll 메서드 - 결함이 있다!
 //    // 매개변수화 타입이 불공변이기 때문이다. (Iterable<Number>와 Iterable<Integer>는 하위/상위타입이 아니다.)
 //    public void pushAll(Iterable<E> src) {
-    //  //타입이 일치하면 괜찮은데 상위/하위타입(Number/Integer)이면 오류 발생
+//      //타입이 일치하면 괜찮은데 상위/하위타입(Number/Integer)이면 오류 발생
 //        for (E e : src)
 //            push(e);
 //    }

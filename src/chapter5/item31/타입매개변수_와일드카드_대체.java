@@ -25,6 +25,7 @@ public class 타입매개변수_와일드카드_대체 {
         }
         return sum;
     }
+
     //한정적 와일드카드
     public static double sumWild(List<? extends Number> list) {
         double sum = 0.0;
