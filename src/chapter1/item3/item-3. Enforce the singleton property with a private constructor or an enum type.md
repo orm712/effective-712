@@ -84,6 +84,18 @@ public class Elvis {
 	- (원할경우) `제네릭 싱글턴 팩터리`로 변경할 수 있음
 - 정적 팩터리 `메서드의 참조`를 `공급자(Supplier)`로 사용할 수 있음
 	- ex) `Elvis::getInstance`를 Supplier\<Elvis\>로 사용하는 식
+		- `Suppiler`: 함수형 프로그래밍을 지원하기 위해 Java 8부터 도입된 인터페이스. 인수를 받지 않지만, `T` 타입의 값을 생성하는 함수를 말함 
+```java
+import java.util.function.Supplier; 
+  
+public class Main { 
+	public static void main(String args[]) 
+	{ 
+		Supplier<Elvis> supplier = Elvis::getInstance; 
+		Elvis elivs = supplier.get();
+	} 
+} 
+```
 ### 직렬화
 - 싱글턴 클래스를 직렬화하기 위해서는 `Serializable` 구현 이상의 작업이 필요
 	1. 모든 인스턴스 필드를 `transient`(일시적) 키워드로 선언한다.
