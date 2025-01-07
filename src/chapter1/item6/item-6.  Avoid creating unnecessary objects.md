@@ -7,7 +7,7 @@
 > - 같은 값임에도 다른 레퍼런스인 경우
 >   - 기존의 인스턴스를 재사용하자.
 ```java
-String s = new String("bikikni");
+String s = new String("bikini");
 ```
 - String을 new로 생성하면 항상 새로운 객체를 만들게 된다.
 ```java
