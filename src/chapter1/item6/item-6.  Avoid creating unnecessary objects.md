@@ -62,6 +62,7 @@ public class RomanNumerals {
 ```java
 Map<String, Object> map = new HashMap<>();
 map.put("Hello", "World");
+map.put("yes", "hi");
 
 Set<String> set1 = map.keySet();
 Set<String> set2 = map.keySet();
@@ -70,7 +71,7 @@ assertThat(set1).isSameAs(set2); // TRUE
 
 set1.remove("Hello");
 System.out.println(set1.size()); // 1
-System.out.println(set1.size()); // 1
+System.out.println(set2.size()); // 1
 ```
 
 > - Map 인터페이스의 `keySet`메서드는 Map 객체안의 키 전부를 담은 `Set` 인터페이스의 뷰를 반환한다.
