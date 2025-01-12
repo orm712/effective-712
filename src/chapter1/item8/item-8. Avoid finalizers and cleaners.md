@@ -5,7 +5,7 @@ finalizer와 cleaner 사용을 피하라
 		- *`Java`에서 제공하는 라이브러리에서도 사용*되고 있지만, **예측할 수 없고**, 상황에 따라 **위험**할 수 있으며 **오동작**, **이식성 문제** 등 다양한 **`위험 부담`** 이 있기 때문
 		- 또한, Java 9 버전 부터 `deprecated API`로 지정하며, `cleaner`를 **대안**으로 소개
 	- `cleaner`의 경우 `finalizer`보다 덜 위험하지만, 여전히 `예측 불가능`/`느림`/`(일반적으로)불필요` 하다는 **단점**이 존재
-### 문제 - 굼뜨고 예축 불가능한 호출 시점
+### 문제 - 굼뜨고 예측 불가능한 호출 시점
 - `finalizer`와 `cleaner` 모두 호출 즉시 수행된다는 보장이 없음
 	- 객체에 접근할 수 없게 된 후 이들이 실행되기까지 얼마나 걸릴지 알 수 없으므로, 이들로 시간에 민감한 작업은 수행할 수 없음
 	- ex) 시스템이 *동시에 열 수 있는 파일 갯수는 제한*이 있는데, `finalizer`나 `cleaner`에게 파일 닫기를 맡길 경우 실행이 게으르게 수행되어 파일을 계속 열어 둘 수도 있고 이로 인해 새로운 파일을 열지 못해 프로그램이 비정상 종료될 수 있음
@@ -94,7 +94,7 @@ class CLass {
     }
 ```
 - 출처: [jdk/src/java.base/share/classes/java/io/FileInputStream.java at 3789983e89c9de252ef546a1b98a732a7d066650 · openjdk/jdk](https://github.com/openjdk/jdk/blob/3789983e89c9de252ef546a1b98a732a7d066650/src/java.base/share/classes/java/io/FileInputStream.java)
-### 네이티브 피어(native peeer)와 연결된 객체 - 자바 피어
+### 자바 피어 ( `네이티브 피어(native peer)`와 연결된 객체 )
 - `네이티브 피어`?
 	- 일반 자바 객체가 `네이티브 메서드`를 통해 기능을 위임한 `네이티브 객체`
 - `네이티브 피어`는 Java 객체가 아니므로, GC는 존재를 알지 못함
