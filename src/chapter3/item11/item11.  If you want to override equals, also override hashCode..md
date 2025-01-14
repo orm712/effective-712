@@ -7,6 +7,7 @@
 > - `equals` 비교에 사용되는 정보가 변경되지 않았다면, hashCode 도 변하면 안 된다.
 >   - 애플리케이션을 다시 실행한다면 이 값이 달라져도 상관 없음
 > - `equals`가 두 객체가 같다고 판단했다면, 두 객체의 `hashCode`는 똑같은 값을 반환한다.
+>     - ![image](https://github.com/user-attachments/assets/4630ad5f-b7a2-47b4-a0ac-146d6d10a5f3)
 > - `equals`가 두 객체를 다르다고 판단했더라도, `hashCode`는 꼭 다를 필요는 없다.
 >   - 하지만, 다른 객체에 대해서는 다른 값을 반환해야 해시테이블의 성능이 좋아진다.
 
