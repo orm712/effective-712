@@ -1,4 +1,4 @@
-package chapter8.Item51;
+package chapter8.item51;
 
 public enum TemperatureScale {
     FAHRENHEIT {
