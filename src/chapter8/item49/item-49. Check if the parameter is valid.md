@@ -47,7 +47,7 @@ this.strategy = Objects.requireNonNull(strategy, "전략");
 
 > - 공개되지 않은 메서드라면 패키지 제작자인 개발자가 메서드를 호출되는 상황을 통제할 수 있다.
 > - 따라서 오직 유효한 값만이 메서드에 넘겨지리라는 것을 여러분이 보증할 수 있고, 그렇게 해야 한다.
-> - 다시 말해 public이 아닌 메서드라면 단언문(assert)을 사용해 매개변수 유효성을 검증할 수 있따.
+> - 다시 말해 public이 아닌 메서드라면 단언문(assert)을 사용해 매개변수 유효성을 검증할 수 있다.
 
 ```java
 private static void sort(long a[], int offset, int length) {
@@ -68,7 +68,7 @@ private static void sort(long a[], int offset, int length) {
 > - 유효성 검사 비용이 지나치게 높거나 실용적이지 않을 떄, 혹은 계산 과정에서 암묵적으로 검사가 수행될 때 예외가 있다.
 >   - Collections.sort(List)
 >     - 리스트 안의 객체들은 정렬 과정에서 이 비교가 이뤄진다.
->     - 비교될 수 없는 객체가 들어 있다면 비교할 때 Class CastException을 던질 것이다.
+>     - 비교될 수 없는 객체가 들어 있다면 비교할 때 ClassCastException을 던질 것이다.
 >     - 따라서 비교하기 앞서 모든 객체가 상호 비교될 수 있는지 검사해봐야 별다른 실익이 없다.
 
 ## 정리
