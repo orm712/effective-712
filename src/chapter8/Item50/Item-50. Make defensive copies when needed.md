@@ -2,10 +2,10 @@
 ## 자바의 보안
 - C/C++과 달리 *`네이티브 메서드`를 쓰지 않아* (메모리적으로) `자바는 안전함`
 	- `버퍼 오버런`, `배열 오버런`, `와일드 포인터`와 같은 `메모리 충돌 오류` 발생 X
-		- `버퍼 오버런`: 
-		- `배열 오버런`: 
-		- `와일드 포인터`: 
-	- 이는 해당 언어들이 메모리를 하나의 큰 배열(연속된 시퀀스)로 다루기 때문
+		- `버퍼 오버런`(`버퍼 오버플로`): 버퍼에 데이터 저장시, `지정된 범위 바깥에 저장`하는 것
+		- `배열 오버런`: `배열의 지정된 크기`를 `벗어나 접근`하는 것
+		- `와일드 포인터`: `초기화되지 않은 포인터`를 사용하는 것. 보통 할당 해제된 객체를 가리키는 `댕글링 포인터`와 함께 언급됨
+	- 이는 해당 언어들이 `메모리`를 `하나의 큰 배열(연속된 시퀀스)`로 다루기 때문
 ## 그럼에도 방어적인 프로그래밍은 필요함
 - 악의적이든, 실수로든 클래스를 오작동시키지 못하도록 보호할 수 있어야 함
 ### 예시 - 가변 객체로 인한 내부 수정
@@ -38,13 +38,13 @@ public final class Period {
 ```
 - 일반적으로 외부에서 (*객채의 허락 없이*) 내부를 수정하는 일은 불가능
 - 위 클래스에서는 가변인 `Date` 객체를 인자로 받은 값 그대로 사용하여, 내부를 수정할 수 있게 됨
-	```java
-	// Period 인스턴스의 내부 공격하는 코드
-	Date start = new Date();
-	Date end = new Date();
-	Period p = new Period(start, end);
-	end.setYear(78); // p의 내부 수정
-	```
+  ```java
+  // Period 인스턴스의 내부 공격하는 코드
+  Date start = new Date();
+  Date end = new Date();
+  Period p = new Period(start, end);
+  end.setYear(78); // p의 내부 수정
+  ```
 	- 따라서 위처럼 *불변식을 검사하는 부분(생성자)* 을 통과한 뒤 내부 값을 수정해 불변식을 깨뜨림
 #### 해결법?
 - Java 8에 등장한 [Instant](https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html) (또는 [LocalDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html), [ZonedDateTime](https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html)를 사용하면 됨
@@ -68,7 +68,7 @@ public Period(Date start, Date end) {
 	- 이들을 보완하면, `네이티브 메서드`, `리플렉션`과 같이 *`언어 외적인 수단` 없이*는 **`불변식`을 위배할 수 없음**
 #### 공격 1 - `유효성 검사 시점`에 따른
 - `매개변수의 유효성 검사` **이전**에 `방어적 복사`를 수행한 뒤, `복사본`에 대해 **`유효성 검사를 수행`** 함
-	![TOCTOU-Attack.png](TOCTOU-Attack.png)
+  ![TOCTOU-Attack.png](TOCTOU-Attack.png)
 	- 이는 `멀티스레딩 환경`에서 `원본 객체의 유효성 검사` - `복사본 생성`으로 이어지는 흐름 사이의 찰나에 `다른 스레드가 원본을 수정`하는 `위험`을 `방지`
 	- 이러한 공격을 `검사시점/사용시점(time-of-check/time-of-use) 공격(또는 TOCTOU 공격)` 이라고 함
 #### 공격 2 - `clone` 메서드 호출에 따른
@@ -89,7 +89,7 @@ public static int someWhere()
 	List<Date> list = new ArrayList<Date>();
 	MaliciousDate start = new MaliciousDate(120301230L, list);
 	MaliciousDate end = new MaliciousDate(120301280L, list);
-	
+
 	Period p = new Period(start, end);
 	list.get(0).setYear(33);
 }
@@ -100,20 +100,20 @@ public static int someWhere()
 #### 공격 3 - 접근자 메서드로 인한 내부 가변 필드 직접 노출
 ```java
 	Date start = new Date();
-	Date end = new Date();
-	Period p = new Period(start, end);
+Date end = new Date();
+Period p = new Period(start, end);
 	p.end().setYear(78);
 ```
 - `접근자 메서드`인 `start()`, `end()`를 통해 내부 가변 필드가 `직접적으로 드러남`
 - 이를 방지하기 위해서는 `접근자 메서드`에서 `가변 필드`의 `방어적 복사본`을 반환해야 함
-	```java
-	public Date start() {
-		return new Date(start.getTime());
-	}
-	public Date end() {
-		return new Date(end.getTime());
-	}
-	```
+  ```java
+  public Date start() {
+      return new Date(start.getTime());
+  }
+  public Date end() {
+      return new Date(end.getTime());
+  }
+  ```
 	- 추가로, 위 코드에서는 `clone()`을 사용해도 됨
 		- `Period`가 갖고있는 `Date 객체`는 `java.util.Date`임이 확실하기 때문
 		- 다만, *웬만하면* `인스턴스 복사`시에는 `생성자`, `정적 팩터리`를 쓰는게 `좋음`
