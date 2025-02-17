@@ -10,7 +10,7 @@ import static java.math.BigInteger.*;
 public class Primes {
     public static void main(String[] args) {
         primes().map(p -> TWO.pow(p.intValueExact()).subtract(ONE))
-//                .parallel() // 스트림 병렬화
+                .parallel() // 스트림 병렬화
                 .filter(mersenne -> mersenne.isProbablePrime(50))
                 .limit(20)
                 .forEach(System.out::println);
