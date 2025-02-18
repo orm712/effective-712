@@ -4,7 +4,7 @@
 > 1. 예외를 던진다.
 > 2. 반환 타입이 객체 참조라면, Null을 반환한다.
 
-> 이러한 방법 시 스택 추적 전체를 갭처하므로 비용이 크다. 또한, null 반환은 별도의 null 처리 코드를 추가해야 한다는 단점도 존재한다.
+> 이러한 방법 시 스택 전체를 추적하므로 비용이 크다. 또한, null 반환은 별도의 null 처리 코드를 추가해야 한다는 단점도 존재한다.
 
 ```java
 public static <E extends Comparable<E>> E max(Collection<E> c) {
@@ -54,7 +54,7 @@ public static <E extends Comparable<E>> Optional<E> max(Collection<E> c) {
 > 메서드가 옵셔널을 반환한다면, 클라이언트는 값을 받지 못했을 때 행동을 여러가지 선택할 수 있다.
 
 ### orElse
-> 기본값을 설정해둘 수 있다.
+> null이 들어올 경우의 기본값을 설정해둘 수 있다.
 ```java
 String lastWordInLexicon = max(words).orElse("단어 없음...");
 ```
@@ -75,8 +75,9 @@ Element lastNobleGas = max(Elements.NOBLE_GASES).get();
 > 단 값이 없다면 `NoSuchElementException`을 발생시킬 것이다.
 
 ### orElseGet
-> - 기본값을 설정하는 비용이 아주 커서 부담이 된다면, `Supplier<T>`를 인수로 받는 orElseGet을 사용하면 된다.
+> - 기본값을 설정하는 비용이 아주 커서 부담이 된다면, `Optional<T>`이 아니라, `Supplier<T>`를 인수로 받는 orElseGet을 사용하면 된다.
 > - 값이 처음 필요할 때 `Supplier<T>`를 사용해 생성하므로 초기 설정 비용을 낮출 수 있기 때문이다.
+>   - `lazy evaluation`으로 `orElse`는 값을 미리 생성하는데 반에, `orElseGet`은 `Supplier`를 인자로 받아 Optional이 비어있을 때만, Supplier의 `get`을 호출하여 필요할 때 기본값을 생성한다.
 ![img_2.png](img_2.png)
 
 ### isPresent

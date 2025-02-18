@@ -34,6 +34,10 @@ public List<Cheese> getCheese() {
     	Collections.emptyList() : new ArrayList<>(cheesesInStock);
 }
 ```
+![img.png](img.png)
+[EmptyListTest.java](EmptyListTest.java)
+> - `emptyList`는 static으로 선언되어 있기 때문에, 컴파일타임에 미리 할당을 한다.
+> - final로, 불변 객체를 리턴한다. 따라서 값의 추가가 불가능 하다.
 
 ## 빈 배열 반환 메서드
 > 배열도 마찬가지로 `null`이 아닌 길이가 0인 배열을 반환하자.
@@ -45,7 +49,7 @@ public Cheese[] getCheeses() {
 }
 ```
 
-> - 최적화 : 빈 배열을 매번 새로 할당 X
+### 최적화 : 빈 배열을 매번 새로 할당 X
 > - `List.toArray(T[] a)` 메서드는 주어진 배열 a가 충분히 크면 a안에 원소를 담아 반환하고, 그렇지 않다면 `T[]` 타입 배열을 새로 만들어 그 안에 원소를 담아 반환한다.
 > - 따라서 원소가 하나라도 있다면 `Cheese[]` 타입 배열을 새로 생성해 반환하고, 원소가 0개면 EMPTY_CHEESE_ARRAY를 반환한다.
 ```java
