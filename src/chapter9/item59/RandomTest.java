@@ -1,8 +1,10 @@
 package chapter9.item59;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomTest {
+    static ThreadLocalRandom random = ThreadLocalRandom.current();
     static Random rnd = new Random();
 
     public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class RandomTest {
         int low = 0;
 
         for (int i=0; i < 1_000_000; i++) {
-            if (randomNumber(n) < n / 2) { // 약 7억
+            if (randomNumber2(n) < n / 2) { // 약 7억
                 low++;
             }
         }
@@ -23,7 +25,7 @@ public class RandomTest {
     }
 
     public static int randomNumber2(int n) {
-        return rnd.nextInt(n);
+        return random.nextInt(n);
     }
 
 }

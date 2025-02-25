@@ -24,6 +24,7 @@
 > - 메이저 릴리즈에 주목할만한 수많은 기능이 라이브러리에 추가된다.
 
 ## 자바 9에서 추가된 `transferTo()`의 예
+> 자바에서 I/O 작업 시 데이터 전송을 보다 효율적으로 수행하기 위한 기능을 제공한다.
 ```java
 public void urlTest() throws IOException {
     try (InputStream in = new URL("https://dbpia.co.kr").openStream()) {
