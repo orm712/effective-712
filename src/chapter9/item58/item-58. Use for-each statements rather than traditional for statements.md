@@ -70,7 +70,7 @@ for (Iterator<ElementType> it = iterable.iterator(); it.hasNext(); ) {
     ElementType element = it.next();
     // element를 사용한 코드
 }
-```
+``` 
 > 따라서, for-each문은 Iterable 인터페이스를 구현한 객체만 사용할 수 있으며, 이를 통해 직접 Iterator를 생성하고 순회하는 번고로움을 줄일 수 있다.
 
 
