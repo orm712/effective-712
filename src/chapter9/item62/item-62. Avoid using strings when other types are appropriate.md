@@ -4,7 +4,7 @@
 ## 문자열과 타입
 ### 1. 기본 타입
 > - 문자열은 다른 값 타입을 대신하기에 적합하지 않다.
-> - 예를 들어 키보드 입력으로부터 데이터를 받을 때, 실제 데이터가 수치형임에도 불구하고 문자열로 받는 경우가 흔하다.
+>   - 하지만 키보드 입력으로부터 데이터를 받을 때, 실제 데이터가 수치형임에도 불구하고 문자열로 받는 경우가 흔하다.
 
 > 받은 데이터가 수치형이라면, `int`, `float`, `BigInteger` 등 적당한 수치 타입으로 변환해야 한다.
 
@@ -25,8 +25,8 @@ String compoundKey = className + "#" + i.next();
 ```java
 public class A {
 	private static class B {
-    ...
-    }
+            ...
+        }
 }
 ```
 
@@ -39,15 +39,17 @@ public class A {
 ### 문자열로 권한 부여
 ```java
 public class ThreadLocal {
-	private ThreadLocal() {} // 객체 생성 불가
-    
+    private ThreadLocal() {
+    } // 객체 생성 불가
+
     // 현 스레드의 값을 키로 구분해 저장
     public static void set(String key, Object value);
-    
+
     // (키가 가리키는) 현 스레드의 값을 변환하다.
     public static Object get(String key);
-    
+
     //...
+}
 ```
 
 > - 이 방식의 문제는 스레드 구분용 문자열 키가 전역 이름공간에서 공유된다는 점이다.
@@ -56,19 +58,23 @@ public class ThreadLocal {
 ### Key 클래스로 권한 부여
 ```java
 public class ThreadLocal {
-	private ThreadLocal() { }
-    
-    public static class Key {
-    	Key() { }
+    private ThreadLocal() {
     }
-   
+
+    public static class Key {
+        Key() {
+        }
+    }
+
     // 위조 불가능한 고유 키를 생성한다.
     public static Key getKey() {
-   	   return new Key();
+        return new Key();
     }
-   
+
     public static void set(Key key, Object value);
+
     public static Object get(Key key);
+}
 ```
 
 > - 이제 `set`과 `get`은 정적 메서드일 이유가 없어지니 인스턴스 메서드로 바꿔도 된다.
@@ -78,9 +84,12 @@ public class ThreadLocal {
 ### Key를 ThreadLocal로 변경 후 매개변수화
 ```java
 public final class ThreadLocal<T> {
-	public ThreadLocal();
+    public ThreadLocal();
+
     public void set(T value);
+
     public T get();
+}
 ```
 
 ## 핵심 정리
