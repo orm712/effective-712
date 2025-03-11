@@ -1,11 +1,11 @@
 package chapter9.item63;
 
 public class StringConcatTest {
-    private static final int num = 10000;
+    private static final int num = 1000000;
     // 문자열 연결을 잘못 사용한 예 - 느리다!
     private static String statement() {
         String result = "";
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < num; i++) {
             result += String.valueOf(i);
         }
         return result;
