@@ -17,7 +17,7 @@
 >   - JVM이 발전해서 지금의 자바는 다른 플랫폼에 견줄만 하다.
 > - 그렇다고 네이티브 메소드를 전혀 이용하지는 않는다.
 >   - Thread 클래스의 다양한 메소드(네이티브 메소드)가 있으며, 개선된 프레임워크인 Executors 프레임워크(`java.util.concurrent.ExecutorService`), Virtual Thread 등에서도 내부에서 Thread 클래스의 네이티브 메소드를 이용하고 있다. 
-
+ 
 ## 단점
 > - [아이템 50](../../chapter8/item50/Item-50.%20Make%20defensive%20copies%20when%20needed.md)
 > - 네이티브 언어가 안전하지 않으므로, 네이티브 메서드를 이용하는 애플리케이션도 메모리 훼손 가능성이 있다.
