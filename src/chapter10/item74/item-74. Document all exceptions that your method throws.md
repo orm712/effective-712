@@ -14,6 +14,30 @@
  * /
 ```
 
+### 잘못 사용된 예
+```java
+// 잘못 선언한 예
+public void testMethod() throws Exception {
+
+}
+
+// or
+
+public void testMethod() throws Throwable {
+
+}
+```
+
+### 올바른 예
+```java
+/**
+ * @throws IllegalStateException
+ */
+public void testMethod(String parameter) throws IllegalStateException {
+  
+}
+```
+
 > 단, 한 클래스에 정의된 많은 메서드가 같은 이유로 같은 예외를 던진다면 각각의 메서드가 아닌 클래스 설명에 추가하는 방법도 있다. (ex) `NullPointerException` )
 
 ### 주의 사항
@@ -22,7 +46,7 @@
 
 ### 비검사 예외
 > - 필수 요구사항은 아니지만, 비검사 예외도 문서화해두면 좋다.
-> - 잘 정비된 비검사 에외는 사실상 그 메서드를 성공적으로 수행하기 위한 전제조건이 되기 때문이다.
+> - 잘 정비된 비검사 예외는 사실상 그 메서드를 성공적으로 수행하기 위한 전제조건이 되기 때문이다.
 > - 문서화 방법은 검사 예외와 비슷하지만 주의해야할 점이 있다.
 
 ### 주의 사항
