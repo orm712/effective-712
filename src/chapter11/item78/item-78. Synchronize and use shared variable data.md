@@ -13,29 +13,11 @@
 
 ### 기본형 타입이 원자적인 이유
 > JVM은 데이터를 4바이트(32비트) 단위로 처리한다.
-> - `int`보다 작은 타입 : 하나의 명령어로 처리되기 때문에, 한 스레드로만 처리된다(작업의 최소 단위).
+> - `int`보다 작은(이하) 타입 : 하나의 명령어로 처리되기 때문에, 한 스레드로만 처리된다(작업의 최소 단위).
 > - `long`, `double` : `8`바이트를 넘어가기 때문에 여러 스레드가 개입될 여지가 생겨 원자적이라 할 수 없다.
 
 ### 예시
-```java
-public class StopThread {
-	private static boolean stopRequested;
-    
-    public static void main(String[] args) throws InterruptedException {
-    	Thread th = new Thread(() -> {
-        	int i = 0;
-            while (!stopRequested) {
-            	i++;
-                System.out.println(i);
-            }
-        });
-        th.start();
-        
-        TimeUnit.SECONDS.sleep(1);
-        stopRequested = true;
-    }
-}
-```
+> - [StopThread.java](StopThread.java)
 > - 스레드를 1초 멈춘 후에 반복문을 빠져나올 수 있도록 설정했으니, 1초 후에 프로그램이 종료가 되는게 정상이다.
 > - 하지만, `stopRequested` 필드가 동기화가 되어 있지 않아, 수정된 값을 해당 스레드가 보는 것이 보장되지 않기 때문에 무한 루프를 돌게 된다.
 
