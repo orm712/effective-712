@@ -19,6 +19,7 @@ public class Test2 {
                     ExecutorService exec =
                             Executors.newSingleThreadExecutor();
                     try {
+
                         exec.submit(() -> s.removeObserver(this)).get();
                     } catch (ExecutionException | InterruptedException ex) {
                         throw new AssertionError(ex);
