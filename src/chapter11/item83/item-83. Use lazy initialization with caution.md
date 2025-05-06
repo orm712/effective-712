@@ -33,11 +33,14 @@ private synchronized FieldType getField() {
 
 ### ex3) 정적 필드용 지연 초기화 홀더 클래스 관용구 예시
 ```java
-private static class FieldHolder {
-  static final FieldType field = computeFieldValue();
+public class Field{
+    private static class FieldHolder {
+        static final FieldType field = computeFieldValue();
+    }
+
+    private static FieldType getField() { return FieldHolder.field; }
 }
 
-private static FieldType getField() { return FieldHolder.field; }
 ```
 > - 성능 때문에 정적 필드를 지연 초기화해야 한다면 `지연 초기화 홀더 클래스 관용구`를 사용하자
 > - 클래스는 클래스가 `처음 쓰일 때 비로소 초기화`된다는 특성을 이용한 관용구이다.
