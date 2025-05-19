@@ -113,6 +113,7 @@ public final class StringList implements Serializable {
 > - transient 키워드가 붙은 필드는 기본 직렬화 형태에 포함되지 않는다.
 >   - 클래스의 모든 필드가 transient로 선언되었더라도 writeObject와 readObject 메서드는 각각 defaultWriteObject와 defaultReadObject 메서드를 호출한다.
 >     - 이렇게 해야 향후 릴리즈에서 transient가 아닌 필드가 추가되더라도 상위와 하위 모두 호환이 가능하다.
+>     - 새롭게 추가되는 애들만 stream에 넣어서 직렬화
 > - 신버전의 인스턴스를 직렬화한 후에 구버전으로 역직렬화하면 새로 추가된 필드는 무시될 것이다.
 >   - 또 구버전 readObject 메서드에서 defaultReadObject를 호출하지 않는다면 역직렬화 과정에서 StreamCorruptedException이 발생한다.
 
