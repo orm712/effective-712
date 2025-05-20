@@ -94,7 +94,7 @@ public final class StringList implements Serializable {
 
         // 모든 원소를 순서대로 기록한다.
         for (Entry e = head; e != null; e = e.next) {
-            s.writeObject(e.data);
+            stream.writeObject(e.data);
         }
     }
 
