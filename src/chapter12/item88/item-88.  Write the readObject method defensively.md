@@ -38,10 +38,13 @@ public final class Period {
 >   - 그렇지 않다면 불변식을 깨뜨리는 공격으로부터 취약해질 수 있다.
 
 ## readObject 메서드
-> - `readObject` 메서드는 매개변수로 바이트 스트림을 받는 생성자이다.
+> - `readObject` 메서드는 매개변수로 바이트 스트림을 받는 생성자이다. (역직렬화)
+> - 역직렬화 과정에서 자동 호출되어 객체를 복원한다.
 > - 보통 바이트 스트림은 정상적으로 생성된 인스턴스를 직렬화해서 만들어진다.
->   - 하지만, 불변을 깨뜨릴 의도로 만들어진 바이트 스트림을 받으면 문제가 생긴다.
->   - 정상적인 방법으로는 만들어 낼 수 없는 객체를 생서하기 때문이다.
+>   - readObject는 생성자를 이용하지 않고 역직렬화 메서드를 이용해서 객체를 만든다.
+>     - 생성자에 만들어놓은 불변식 검사 로직을 수행하지 않는다.
+>   - 불변을 깨뜨릴 의도로 만들어진 바이트 스트림을 받으면 문제가 생긴다.
+>   - 정상적인 방법으로는 만들어 낼 수 없는 객체를 생성하기 때문이다.
 
 > - 단순하게 앞선 Period 클래스에 `Serializable` 구현을 추가했을 때, 아래 코드는 불변식을 깨뜨리는 공격을 할 수 있다.
 
@@ -83,11 +86,14 @@ Fri Jan 01 12:00:00 PST 1999 - Sun Jan 01 12:00:00 PST 1984
 
 ## 어떻게 방어?
 > - `readObject` 메서드가 `defaultReadObject`를 호출하게 한 후에 역직렬화된 객체가 유효한지 검사해야 한다.
+>   - `Serializable` 객체의 non-transient, non-static 필드들이 직렬화된 값으로부터 복원
+>   - 직렬화된 데이터에 name="Jin" 나이=25가 있었다면 그 값 그대로 세팅
+>   - 기본 역직렬화는 default 값으로 바꿔버림
 > - 여기서 유효성 검사에 실패한다면 `InvalidObjectException`을 던져 잘못된 역직렬화가 발생되는 것을 막아야 한다.
 ```java
 private void readObject(ObjectInputStream s)
         throws IOException, ClassNotFoundException {
-
+    s.defaultReadObject();
     // 불변식을 만족하는지 검사한다.
     if (start.compareTo(end) > 0) {
         throw new InvalidObjectException(start + "after" + end);
@@ -95,7 +101,7 @@ private void readObject(ObjectInputStream s)
 }
 ```
 
-> - 그래도 아직 부족하다.
+> - `그래도 아직 부족하다.`
 >   - 정상적인 Period 인스턴스에서 시작된 바이트 스트림 끝에 `private Date`필드로의 참조를 추가하면 가변적인 Period 인스턴스를 만들어낼 수 있다.
 >   - 공격자가 역직렬화를 통해 바이트 스트림 끝의 참조 값을 읽으면 Period의 내부 정보를 얻을 수 있다.
 >   - 이 참조를 이용하여 인스턴스를 수정할 수 있다.
@@ -166,6 +172,8 @@ Wed Nov 22 00:21:29 PST 2017 - Sat Nov 22 00:21:29 PST 1969
 ## 방어적 복사와 유효성 검사를 모두 수행한다.
 > - Period를 공격으로부터 보호하기 위해 방어적 복사를 유효성 검사보다 먼저 수행해야 한다.
 > - 또한 Date의 `clone` 메서드는 사용되지 않았다.
+>   - 얕은 복사
+>   - Cloneable 인터페이스를 구현하지 않으면 `CloneNotSupportedException`이 발생한다.
 
 ```java
 private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
